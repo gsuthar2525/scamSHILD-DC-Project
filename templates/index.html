@@ -1,0 +1,141 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ScamSHIELD | SMS Detector</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <a href="/" class="logo">ScamSHIELD</a>
+
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="#about">About</a>
+        </div>
+    </nav>
+
+    <!-- Main Section -->
+    <main class="container">
+
+        <section class="hero">
+            <p class="tagline">SMART MESSAGE PROTECTION</p>
+
+            <h1>SMS Scam Detector</h1>
+
+            <p class="description">
+                Check whether your SMS message looks like spam
+                or a normal message using Machine Learning.
+            </p>
+        </section>
+
+        <!-- Message Form -->
+        <section class="detector-card">
+
+            <h2>Check Your Message</h2>
+
+            <!-- <p class="form-description">
+                Please Enter your SMS message.
+            </p> -->
+
+            <form action="/check" method="POST">
+
+                <!-- <label for="message">Enter SMS Message</label> -->
+
+                <textarea
+                    name="message"
+                    id="message"
+                    placeholder="Enter your SMS message here..."
+                    rows="5"
+                ></textarea>
+
+                <button type="submit" class="check-button">
+                    Check Message
+                </button>
+
+            </form>
+
+            <!-- Result Bar -->
+            {% if result %}
+            <div class="result {{ result.result_type }}" role="status">
+
+                <h3>{{ result.detection }}</h3>
+
+                {% if result.chance %}
+                <p class="chance">{{ result.chance }}</p>
+                {% endif %}
+
+                {% if result.probability %}
+                <p class="probability">
+                    Spam Probability: {{ result.probability }}
+                </p>
+                {% endif %}
+
+            </div>
+            {% endif %}
+
+        </section>
+
+        <!-- About Section -->
+        <section class="about-section" id="about">
+
+            <h2>About ScamSHIELD</h2>
+
+            <p>
+                ScamSHIELD is a Machine Learning project designed
+                to classify SMS messages as  SPAM or NOT .
+                It uses TF-IDF to convert text into numerical
+                features and a trained classification model
+                to make predictions.
+            </p>
+
+            <div class="stats">
+
+                <div class="stat-card">
+                    <h3>98.71%</h3>
+                    <p>Test Accuracy</p>
+                </div>
+
+                <div class="stat-card">
+                    <h3>95%</h3>
+                    <p>Spam Precision</p>
+                </div>
+
+                <div class="stat-card">
+                    <h3>95%</h3>
+                    <p>Spam Recall</p>
+                </div>
+
+                <div class="stat-card">
+                    <h3>95%</h3>
+                    <p>Spam F1-Score</p>
+                </div>
+
+            </div>
+
+            <p class="note">
+                Metrics are from the reported test evaluation.
+                Actual predictions may not always be correct.
+            </p>
+
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>ScamSHIELD | Machine Learning DC Project</p>
+    </footer>
+
+</body>
+</html>
+
+
